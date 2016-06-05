@@ -1,5 +1,9 @@
 #!/usr/bin/env osascript
 global frontAppProcess, frontAppName, windowTitle
+
+set frontAppName to ""
+set windowTitle to ""
+
 tell application "System Events"
   set frontAppProcess to first application process whose frontmost is true
   set frontAppName to name of frontAppProcess
