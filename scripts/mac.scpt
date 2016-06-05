@@ -1,13 +1,14 @@
 #!/usr/bin/env osascript
-global frontApp, frontAppName, windowTitle
-set windowTitle to ""
+global frontAppProcess, frontAppName, windowTitle
 tell application "System Events"
-	set frontApp to first application process whose frontmost is true
-	set frontAppName to name of frontApp
-	tell process frontAppName
-		tell (1st window whose value of attribute "AXMain" is true)
-			set windowTitle to value of attribute "AXTitle"
-		end tell
-	end tell
+  set frontAppProcess to first application process whose frontmost is true
+  set frontAppName to name of frontAppProcess
 end tell
-return {frontAppName,windowTitle}
+
+tell frontAppProcess
+  if count of windows > 0 then
+   set windowTitle to name of front window
+  end if
+end tell
+
+return { frontAppName, windowTitle }
